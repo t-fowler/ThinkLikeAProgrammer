@@ -21,6 +21,7 @@ void printTriangle() {
     }
 }
 
+// Testing Git
 int main() {
     printHalfSquare();
     cout << '\n';
