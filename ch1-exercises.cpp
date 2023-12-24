@@ -17,16 +17,6 @@ void printUpsidedownTriangle() {
 }
 
 // 2-2
-/*
-1   3   3
-2   2   2
-3   1   1
-4   0   0
-5   0   1
-6   1   2
-7   2   3
-8   3   4
-*/
 void printDiamond() {
     for (int row = 1; row <= 4; row++) {
         for (int space = 1; space <= 4 - row; space++) {
@@ -74,14 +64,6 @@ void printX() {
     }
 }
 
-int binaryToDecimal(string binary) {
-    int decimal = 0;
-    for (int i = 0; i < binary.length() ; i++) {
-        decimal = 2 * decimal + (binary[i] - '0');
-    }
-    return decimal;
-}
-
 int main() {
     printUpsidedownTriangle();
     cout << '\n';
@@ -89,9 +71,4 @@ int main() {
     cout << '\n';
     printX();
     cout << '\n';
-
-    string binary;
-    cout << "Input a binary number:\n";
-    cin >> binary;
-    cout << binaryToDecimal(binary) << '\n';
 }
