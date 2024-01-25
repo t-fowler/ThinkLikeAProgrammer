@@ -45,11 +45,20 @@ void sortStudent(Student* students, size_t size, std::string sortBy) {
 } // namespace TLAP
 
 int main() {
+    const int ARRAY_SIZE = 10;
     std::string columns[3] = {"grade", "studentID", "name"};
-    TLAP::Student students[2] =
+    TLAP::Student students[ARRAY_SIZE] =
     {
-        {100, 1, "Tyler"},
-        {99, 2, "Carolyn"}
+        {99, 1, "Hank"},
+        {100, 2, "Beth"},
+        {78, 3, "Trevor"},
+        {72, 4, "Sydney"},
+        {82, 5, "Frank"},
+        {69, 6, "Veronica"},
+        {77, 7, "Felix"},
+        {95, 8, "Silvia"},
+        {44, 9, "Nathan"},
+        {58, 10, "Jan"}
     };
 
     std::cout << "Printing original student array.\n";
@@ -61,7 +70,7 @@ int main() {
 
     for (auto column : columns) {
         std::cout << "\nPrinting student array sorted by " << column << ".\n";
-        sortStudent(students, 2, column);
+        sortStudent(students, ARRAY_SIZE, column);
         for (auto student : students) {
             std::cout << student.name << ", "
                     << student.studentID << ", "
