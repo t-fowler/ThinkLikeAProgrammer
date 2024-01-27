@@ -4,12 +4,19 @@
 
 namespace TLAP {
 
-// 3-1
+// 3-1, 3-8
 struct Student
 {
     int grade;
     int studentID;
     std::string name;
+};
+
+struct Quartiles
+{
+    int quartile25th;
+    int quartile50th;
+    int quartile75th;
 };
 
 int compareStudentGrade(const void* s1, const void* s2) { 
@@ -30,7 +37,7 @@ int compareStudentName(const void* student1, const void* student2) {
     return s1->name.compare(s2->name);
 }
 
-void sortStudent(Student* students, size_t size, std::string sortBy) {
+void sortStudents(Student students[], size_t size, std::string sortBy) {
     if (sortBy == "grade") {
         std::qsort(students, size, sizeof(Student), compareStudentGrade);
     }
@@ -42,11 +49,21 @@ void sortStudent(Student* students, size_t size, std::string sortBy) {
     }
 }
 
+Quartiles calculateStudentGradeQuartiles(Student students[], size_t size) {
+    sortStudents(students, size, "grade");
+
+    return Quartiles {
+        students[(size / 4)].grade,
+        students[size / 2].grade,
+        students[size * 3 / 4].grade
+    };
+}
+
 } // namespace TLAP
 
 int main() {
     const int ARRAY_SIZE = 10;
-    std::string columns[3] = {"grade", "studentID", "name"};
+    std::string columns[] = {"grade", "studentID", "name"};
     TLAP::Student students[ARRAY_SIZE] =
     {
         {99, 1, "Hank"},
@@ -70,11 +87,17 @@ int main() {
 
     for (auto column : columns) {
         std::cout << "\nPrinting student array sorted by " << column << ".\n";
-        sortStudent(students, ARRAY_SIZE, column);
+        sortStudents(students, ARRAY_SIZE, column);
         for (auto student : students) {
             std::cout << student.name << ", "
                     << student.studentID << ", "
                     << student.grade << "\n";
         }
     }
+
+    TLAP::Quartiles quartiles = calculateStudentGradeQuartiles(students, ARRAY_SIZE);
+    std::cout << "\nQuartiles:\n25th Percentile: " << quartiles.quartile25th
+                << "\n50th Percentile: " << quartiles.quartile50th
+                << "\n75th Percentile: " << quartiles.quartile75th
+                << "\n";
 }
